@@ -6,15 +6,19 @@
 
 #include "../texture.h"
 
+#define JUST
+
 int main()
 {
-#define NP		40
+#define NP		400
 #define S		0.1f
-#define V		3
+#define V		6
 #define DT		0.00005f
-#define F		3000
+#define F		300000
 
+#ifndef JUST
 	char *tt;
+#endif
 
 	float x[NP];
 	float v[NP];
@@ -28,7 +32,15 @@ int main()
 	float d1, d2;
 	int f;
 
+#ifdef JUST
+	float tr[3];
+
+	tr[0] = tr[1] = tr[2] = 0;
+#endif
+
+#ifndef JUST
 	tt = (char*)malloc(10 * NP * 3 * F);
+#endif
 
 	for (i = 0; i < NP; ++i)
 	{
@@ -43,6 +55,7 @@ int main()
 
 	while (f < F)
 	{
+#ifndef JUST
 		for(i=0; i<10*NP; ++i)
 		{
 			tt[i * F * 3  + f * 3] = 255;
@@ -53,6 +66,7 @@ int main()
 				tt[i * F * 3 + f * 3] = 0;
 
 		}
+#endif
 		//t += 0.5f;
 		//dt = 0.5f;
 	re:
@@ -99,7 +113,7 @@ int main()
 
 		for (i = 0; i < NP; ++i)
 		{
-			x[i] += v[i]*dt;
+			x[i] += v[i] * dt;
 			a[i] = 0;
 			for (j = 0; j < NP; ++j)
 			{
@@ -123,14 +137,59 @@ int main()
 				x[i] -= S*NP;
 			j = ((int)((x[i] / (S) * 10)) % (NP * 10));
 
+#ifdef JUST
+			if (i == NP / 2)
+			{
+				if (v[i] > 0)
+				{
+					if (tr[2] == 0)
+					{
+						if (tr[1] == 0)
+						{
+							if (tr[0] == 0)
+							{
+								tr[0] = f;
+								printf("tr[0]=%f\r\n", f);
+							}
+						}
+						else
+						{
+							tr[2] = f;
+							printf("tr[2]=%f\r\n", f);
+						}
+					}
+				}
+				else if (v[i] < 0)
+				{
+					if (tr[2] == 0)
+					{
+						if (tr[1] == 0)
+						{
+							if (tr[0] == 0)
+							{
+							}
+							else
+							{
+								tr[1] = f;
+								printf("tr[1]=%f\r\n", f);
+							}
+						}
+					}
+				}
+			}
+#endif
+
+#ifndef JUST
 			tt[j* F*3 + f * 3 + i % 2 + 1] = 0;
+#endif
 		}
 
 		f++;
 	}
 
+#ifndef JUST
 	savepng("alksjlaksd.png", (unsigned char*)tt, F, NP * 10, 3);
-
+#endif
 	system("pause");
 
 	return 0;
