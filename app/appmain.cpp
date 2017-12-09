@@ -55,6 +55,12 @@ int main()
 
 	while (f < F)
 	{
+#ifdef JUST
+		if (f % (F / 100) == 0)
+		{
+			printf("f%d\r\n", f);
+		}
+#endif
 #ifndef JUST
 		for(i=0; i<10*NP; ++i)
 		{
@@ -149,13 +155,13 @@ int main()
 							if (tr[0] == 0)
 							{
 								tr[0] = f;
-								printf("tr[0]=%f\r\n", f);
+								printf("tr[0]=%d\r\n", f);
 							}
 						}
 						else
 						{
 							tr[2] = f;
-							printf("tr[2]=%f\r\n", f);
+							printf("tr[2]=%d\r\n", f);
 						}
 					}
 				}
@@ -171,7 +177,7 @@ int main()
 							else
 							{
 								tr[1] = f;
-								printf("tr[1]=%f\r\n", f);
+								printf("tr[1]=%d\r\n", f);
 							}
 						}
 					}
