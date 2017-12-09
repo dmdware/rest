@@ -10,7 +10,7 @@
 
 int main()
 {
-#define NP		400
+#define NP		800
 #define S		0.1f
 #define V		6
 #define DT		0.00005f
