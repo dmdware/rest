@@ -176,7 +176,7 @@ int main()
 				{
 					if (j % 2 == 0)
 					{
-						if (tr[j] == 0)
+						if (trr[j] == 0)
 						{
 							if (j == 0)
 							{
@@ -190,7 +190,7 @@ int main()
 					}
 					else
 					{
-						if (tr[j] == 0)
+						if (trr[j] == 0)
 						{
 						}
 						else
@@ -209,7 +209,7 @@ int main()
 				{
 					if (j % 2 == 0)
 					{
-						if (tr[j] == 0)
+						if (trr[j] == 0)
 						{
 						}
 						else
@@ -222,7 +222,7 @@ int main()
 					}
 					else
 					{
-						if (tr[j] == 0)
+						if (trr[j] == 0)
 						{
 						}
 						else
@@ -235,7 +235,7 @@ int main()
 				goto n;
 
 			y:
-				tr[j] = f;
+				trr[j] = f;
 				printf("tr%s[%d]=%d\r\n", (i==NP/2 ? "" : (i==NP*3/4 ? "h2" : "h")), j, f);
 			}
 
