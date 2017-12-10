@@ -10,11 +10,12 @@
 
 int main()
 {
-#define NP		800
+#define NP		200
 #define S		0.1f
 #define V		6
 #define DT		0.00005f
-#define F		300000
+#define F		3000000
+#define NW		3
 
 #ifndef JUST
 	char *tt;
@@ -33,9 +34,9 @@ int main()
 	int f;
 
 #ifdef JUST
-	float tr[3];
+	float tr[NW];
 
-	tr[0] = tr[1] = tr[2] = 0;
+	memset(tr, 0, sizeof(float)*NW);
 #endif
 
 #ifndef JUST
@@ -56,7 +57,7 @@ int main()
 	while (f < F)
 	{
 #ifdef JUST
-		if (f % (F / 100) == 0)
+		if (f % (F / 1000) == 0)
 		{
 			printf("f%d\r\n", f);
 		}
@@ -148,41 +149,64 @@ int main()
 			{
 				if (v[i] > 0)
 				{
-					if (tr[2] == 0)
+					for (j = NW - 1; j >= 0; --j)
 					{
-						if (tr[1] == 0)
+						if (j % 2 == 0)
 						{
-							if (tr[0] == 0)
+							if (tr[j] == 0)
 							{
-								tr[0] = f;
-								printf("tr[0]=%d\r\n", f);
+								if (j == 0)
+								{
+									goto y;
+								}
 							}
 						}
 						else
 						{
-							tr[2] = f;
-							printf("tr[2]=%d\r\n", f);
+							if (tr[j] == 0)
+							{
+							}
+							else
+							{
+								++j;
+								goto y;
+							}
 						}
 					}
 				}
 				else if (v[i] < 0)
 				{
-					if (tr[2] == 0)
+					for (j = NW - 1; j >= 0; --j)
 					{
-						if (tr[1] == 0)
+						if (j % 2 == 0)
 						{
-							if (tr[0] == 0)
+							if (tr[j] == 0)
 							{
 							}
 							else
 							{
-								tr[1] = f;
-								printf("tr[1]=%d\r\n", f);
+								++j;
+								goto y;
+							}
+						}
+						else
+						{
+							if (tr[j] == 0)
+							{
 							}
 						}
 					}
 				}
+
+				goto n;
+
+			y:
+				tr[j] = f;
+				printf("tr[%d]=%d\r\n", j, f);
 			}
+
+		n:
+			;
 #endif
 
 #ifndef JUST
