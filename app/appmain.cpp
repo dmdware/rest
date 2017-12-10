@@ -182,10 +182,10 @@ int main()
 							{
 								goto y;
 							}
-							else
-							{
-								goto n;
-							}
+						}
+						else
+						{
+							goto n;
 						}
 					}
 					else
