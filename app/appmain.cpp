@@ -231,13 +231,13 @@ int main()
 						}
 					}
 				}
-
-				goto n;
-
-			y:
-				trr[j] = f;
-				printf("tr%s[%d]=%d\r\n", (i==NP/2 ? "" : (i==NP*3/4 ? "h2" : "h")), j, f);
 			}
+
+			goto n;
+
+		y:
+			trr[j] = f;
+			printf("tr%s[%d]=%d\r\n", (trr == tr ? "" : (trr == h2tr ? "h2" : "h")), j, f);
 
 		n:
 			;
