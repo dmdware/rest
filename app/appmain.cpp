@@ -195,7 +195,7 @@ int main()
 						}
 						else
 						{
-							if (j + 1 >= NW - 1)
+							if (j + 1 >= NW)
 								goto n;
 							++j;
 							goto y;
@@ -214,7 +214,7 @@ int main()
 						}
 						else
 						{
-							if (j + 1 >= NW - 1)
+							if (j + 1 >= NW)
 								goto n;
 							++j;
 							goto y;
