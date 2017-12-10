@@ -162,7 +162,7 @@ int main()
 			}
 			if (i == NP / 4)
 			{
-				trr = h2tr;
+				trr = htr;
 				goto ttt;
 			}
 
