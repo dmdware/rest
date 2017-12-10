@@ -15,7 +15,7 @@ int main()
 #define V		6
 #define DT		0.00005f
 #define F		3000000
-#define NW		4
+#define NW		6
 
 #ifndef JUST
 	char *tt;
@@ -237,7 +237,7 @@ int main()
 
 		y:
 			trr[j] = f;
-			printf("tr%s[%d]=%d\r\n", (trr == tr ? "" : (trr == h2tr ? "h2" : "h")), j, f);
+			printf("tr%s[%d]=%d\r\n", (trr == tr ? "" : (trr == h2tr ? "h2" : "h")), j+1, f);
 
 		n:
 			;
