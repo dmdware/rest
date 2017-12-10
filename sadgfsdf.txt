@@ -14,5 +14,9 @@ a = accel function (eg abs(d) / (d1 ^ 3), which is G M = 1, or k q1 q2 / M1 = k 
 
 
 
-np	s	v	dt	f	tr*1	tr2	tr3	tr4	tr5	tr6	tr7	tr8	tr9	tr10	tr11	ntr	a	c=(np*s)/((tr3-tr2)*dt*2)
-200	0.1	6	0.00005	3000000												3			
+np	s	v	dt	f	tr*1	tr2	tr3	tr4	htr*2	htr2	htr3	htr4	h2tr1	h2tr2	h2tr3	h2tr4	a	c=(np*s)/((tr3-tr2)*dt*2)
+
+htr1*,2,3,4,5 = frame # (or t/dt) of np/4 particle down to start down, then up, then...
+h2tr1*,2,3,4,5 = frame # (or t/dt) of np3/4 particle down to start down, then up, then...
+
+200	0.1	6	0.00005	3000000				

@@ -35,8 +35,12 @@ int main()
 
 #ifdef JUST
 	float tr[NW];
+	float htr[NW];
+	float h2tr[NW];
 
 	memset(tr, 0, sizeof(float)*NW);
+	memset(htr, 0, sizeof(float)*NW);
+	memset(h2tr, 0, sizeof(float)*NW);
 #endif
 
 #ifndef JUST
@@ -206,6 +210,137 @@ int main()
 			}
 
 		n:
+			;
+
+
+			if (i == NP / 4)
+			{
+				if (v[i] > 0)
+				{
+					for (j = NW - 1; j >= 0; --j)
+					{
+						if (j % 2 == 0)
+						{
+							if (htr[j] == 0)
+							{
+								if (j == 0)
+								{
+									goto y;
+								}
+							}
+						}
+						else
+						{
+							if (htr[j] == 0)
+							{
+							}
+							else
+							{
+								++j;
+								goto y;
+							}
+						}
+					}
+				}
+				else if (v[i] < 0)
+				{
+					for (j = NW - 1; j >= 0; --j)
+					{
+						if (j % 2 == 0)
+						{
+							if (htr[j] == 0)
+							{
+							}
+							else
+							{
+								++j;
+								goto y;
+							}
+						}
+						else
+						{
+							if (htr[j] == 0)
+							{
+							}
+						}
+					}
+				}
+
+				goto hn;
+
+			hy:
+				htr[j] = f;
+				printf("htr[%d]=%d\r\n", j, f);
+			}
+
+		hn:
+			;
+
+
+
+
+
+			if (i == NP * 3 / 4)
+			{
+				if (v[i] > 0)
+				{
+					for (j = NW - 1; j >= 0; --j)
+					{
+						if (j % 2 == 0)
+						{
+							if (h2tr[j] == 0)
+							{
+								if (j == 0)
+								{
+									goto y;
+								}
+							}
+						}
+						else
+						{
+							if (h2tr[j] == 0)
+							{
+							}
+							else
+							{
+								++j;
+								goto y;
+							}
+						}
+					}
+				}
+				else if (v[i] < 0)
+				{
+					for (j = NW - 1; j >= 0; --j)
+					{
+						if (j % 2 == 0)
+						{
+							if (h2tr[j] == 0)
+							{
+							}
+							else
+							{
+								++j;
+								goto y;
+							}
+						}
+						else
+						{
+							if (h2tr[j] == 0)
+							{
+							}
+						}
+					}
+				}
+
+				goto h2n;
+
+			h2y:
+				h2tr[j] = f;
+				printf("h2tr[%d]=%d\r\n", j, f);
+			}
+
+		h2n:
 			;
 #endif
 
