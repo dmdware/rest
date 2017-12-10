@@ -10,7 +10,7 @@
 
 int main()
 {
-#define NP		200
+#define NP		400
 #define S		0.1f
 #define V		6
 #define DT		0.00005f
@@ -42,6 +42,10 @@ int main()
 	memset(tr, 0, sizeof(double)*NW);
 	memset(htr, 0, sizeof(double)*NW);
 	memset(h2tr, 0, sizeof(double)*NW);
+#endif
+
+#ifdef JUST
+	printf("np%d s%lf v%lf dt%lf f%d ntw%d\r\n", (int)NP, (double)S, (double)V, (double)DT, (int)F, (int)NW);
 #endif
 
 #ifndef JUST
