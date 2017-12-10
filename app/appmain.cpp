@@ -15,7 +15,7 @@ int main()
 #define V		6
 #define DT		0.00005f
 #define F		3000000
-#define NW		3
+#define NW		4
 
 #ifndef JUST
 	char *tt;
@@ -34,6 +34,7 @@ int main()
 	int f;
 
 #ifdef JUST
+	float *trr;
 	float tr[NW];
 	float htr[NW];
 	float h2tr[NW];
@@ -67,13 +68,13 @@ int main()
 		}
 #endif
 #ifndef JUST
-		for(i=0; i<10*NP; ++i)
+		for (i = 0; i < 10 * NP; ++i)
 		{
-			tt[i * F * 3  + f * 3] = 255;
+			tt[i * F * 3 + f * 3] = 255;
 			tt[i * F * 3 + f * 3 + 1] = 255;
 			tt[i * F * 3 + f * 3 + 2] = 255;
 
-			if(i%10 == 0 && f%3 == 2)
+			if (i % 10 == 0 && f % 3 == 2)
 				tt[i * F * 3 + f * 3] = 0;
 
 		}
@@ -108,7 +109,7 @@ int main()
 				exit(0);
 			}
 
-			if (xx >= S*NP && ((xx - S*NP) > x2) && (xx - S*NP) - x2 <= (S*NP)/2.0f)
+			if (xx >= S*NP && ((xx - S*NP) > x2) && (xx - S*NP) - x2 <= (S*NP) / 2.0f)
 			{
 				dt /= 2.0f;
 				exit(0);
@@ -151,53 +152,82 @@ int main()
 #ifdef JUST
 			if (i == NP / 2)
 			{
-				if (v[i] > 0)
+				trr = tr;
+				goto ttt;
+			}
+			if (i == NP * 3 / 4)
+			{
+				trr = h2tr;
+				goto ttt;
+			}
+			if (i == NP / 4)
+			{
+				trr = h2tr;
+				goto ttt;
+			}
+
+			goto n;
+
+		ttt:
+
+			if (v[i] > 0)
+			{
+				for (j = NW - 1; j >= 0; --j)
 				{
-					for (j = NW - 1; j >= 0; --j)
+					if (j % 2 == 0)
 					{
-						if (j % 2 == 0)
+						if (tr[j] == 0)
 						{
-							if (tr[j] == 0)
+							if (j == 0)
 							{
-								if (j == 0)
-								{
-									goto y;
-								}
-							}
-						}
-						else
-						{
-							if (tr[j] == 0)
-							{
+								goto y;
 							}
 							else
 							{
-								++j;
-								goto y;
+								goto n;
 							}
 						}
 					}
-				}
-				else if (v[i] < 0)
-				{
-					for (j = NW - 1; j >= 0; --j)
+					else
 					{
-						if (j % 2 == 0)
+						if (tr[j] == 0)
 						{
-							if (tr[j] == 0)
-							{
-							}
-							else
-							{
-								++j;
-								goto y;
-							}
 						}
 						else
 						{
-							if (tr[j] == 0)
-							{
-							}
+							if (j + 1 >= NW - 1)
+								goto n;
+							++j;
+							goto y;
+						}
+					}
+				}
+			}
+			else if (v[i] < 0)
+			{
+				for (j = NW - 1; j >= 0; --j)
+				{
+					if (j % 2 == 0)
+					{
+						if (tr[j] == 0)
+						{
+						}
+						else
+						{
+							if (j + 1 >= NW - 1)
+								goto n;
+							++j;
+							goto y;
+						}
+					}
+					else
+					{
+						if (tr[j] == 0)
+						{
+						}
+						else
+						{
+							goto n;
 						}
 					}
 				}
@@ -206,146 +236,15 @@ int main()
 
 			y:
 				tr[j] = f;
-				printf("tr[%d]=%d\r\n", j, f);
+				printf("tr%s[%d]=%d\r\n", (i==NP/2 ? "" : (i==NP*3/4 ? "h2" : "h")), j, f);
 			}
 
 		n:
 			;
-
-
-			if (i == NP / 4)
-			{
-				if (v[i] > 0)
-				{
-					for (j = NW - 1; j >= 0; --j)
-					{
-						if (j % 2 == 0)
-						{
-							if (htr[j] == 0)
-							{
-								if (j == 0)
-								{
-									goto y;
-								}
-							}
-						}
-						else
-						{
-							if (htr[j] == 0)
-							{
-							}
-							else
-							{
-								++j;
-								goto y;
-							}
-						}
-					}
-				}
-				else if (v[i] < 0)
-				{
-					for (j = NW - 1; j >= 0; --j)
-					{
-						if (j % 2 == 0)
-						{
-							if (htr[j] == 0)
-							{
-							}
-							else
-							{
-								++j;
-								goto y;
-							}
-						}
-						else
-						{
-							if (htr[j] == 0)
-							{
-							}
-						}
-					}
-				}
-
-				goto hn;
-
-			hy:
-				htr[j] = f;
-				printf("htr[%d]=%d\r\n", j, f);
-			}
-
-		hn:
-			;
-
-
-
-
-
-			if (i == NP * 3 / 4)
-			{
-				if (v[i] > 0)
-				{
-					for (j = NW - 1; j >= 0; --j)
-					{
-						if (j % 2 == 0)
-						{
-							if (h2tr[j] == 0)
-							{
-								if (j == 0)
-								{
-									goto y;
-								}
-							}
-						}
-						else
-						{
-							if (h2tr[j] == 0)
-							{
-							}
-							else
-							{
-								++j;
-								goto y;
-							}
-						}
-					}
-				}
-				else if (v[i] < 0)
-				{
-					for (j = NW - 1; j >= 0; --j)
-					{
-						if (j % 2 == 0)
-						{
-							if (h2tr[j] == 0)
-							{
-							}
-							else
-							{
-								++j;
-								goto y;
-							}
-						}
-						else
-						{
-							if (h2tr[j] == 0)
-							{
-							}
-						}
-					}
-				}
-
-				goto h2n;
-
-			h2y:
-				h2tr[j] = f;
-				printf("h2tr[%d]=%d\r\n", j, f);
-			}
-
-		h2n:
-			;
 #endif
 
 #ifndef JUST
-			tt[j* F*3 + f * 3 + i % 2 + 1] = 0;
+			tt[j* F * 3 + f * 3 + i % 2 + 1] = 0;
 #endif
 		}
 
