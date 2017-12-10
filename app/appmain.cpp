@@ -10,7 +10,7 @@
 
 int main()
 {
-#define NP		400
+#define NP		100
 #define S		0.1f
 #define V		6
 #define DT		0.00005f
@@ -241,13 +241,25 @@ int main()
 
 		y:
 			trr[j] = f;
-			printf("tr%s[%d]=%d\r\n", (trr == tr ? "" : (trr == h2tr ? "h2" : "h")), j+1, f);
+			printf("tr%s[%d]=%d\r\n", (trr == tr ? "" : (trr == h2tr ? "h2" : "h")), j + 1, f);
 
 		n:
 			;
 
 			if (tr[NW - 1] > 0 && htr[NW - 1] > 0 && h2tr[NW - 1] > 0)
-				break;
+			{
+				for (j = 1; j < NW; ++j)
+				{
+					for (i = j + 1; i < NW; ++i)
+					{
+						printf("c(%d,%d) = %lf\r\n", i, j, NP*S*(i - j) / ((tr[i] - tr[j])*2.0*dt));
+						printf("hc(%d,%d) = %lf\r\n", i, j, NP*S*(i - j) / ((htr[i] - htr[j])*2.0*dt));
+						printf("h2c(%d,%d) = %lf\r\n", i, j, NP*S*(i - j) / ((h2tr[i] - h2tr[j])*2.0*dt));
+					}
+				}
+
+				goto d;
+			}
 #endif
 
 #ifndef JUST
@@ -260,6 +272,9 @@ int main()
 
 #ifndef JUST
 	savepng("alksjlaksd.png", (unsigned char*)tt, F, NP * 10, 3);
+#endif
+#ifdef JUST
+	d:
 #endif
 	system("pause");
 
