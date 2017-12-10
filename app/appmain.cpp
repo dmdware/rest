@@ -21,27 +21,27 @@ int main()
 	char *tt;
 #endif
 
-	float x[NP];
-	float v[NP];
-	float a[NP];
+	double x[NP];
+	double v[NP];
+	double a[NP];
 	int i;
-	float t;
+	double t;
 	int j;
-	float d;
+	double d;
 	double dt;
-	float x1, x2, xx;
-	float d1, d2;
+	double x1, x2, xx;
+	double d1, d2;
 	int f;
 
 #ifdef JUST
-	float *trr;
-	float tr[NW];
-	float htr[NW];
-	float h2tr[NW];
+	double *trr;
+	double tr[NW];
+	double htr[NW];
+	double h2tr[NW];
 
-	memset(tr, 0, sizeof(float)*NW);
-	memset(htr, 0, sizeof(float)*NW);
-	memset(h2tr, 0, sizeof(float)*NW);
+	memset(tr, 0, sizeof(double)*NW);
+	memset(htr, 0, sizeof(double)*NW);
+	memset(h2tr, 0, sizeof(double)*NW);
 #endif
 
 #ifndef JUST
