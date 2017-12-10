@@ -245,6 +245,9 @@ int main()
 
 		n:
 			;
+
+			if (tr[NW - 1] > 0 && htr[NW - 1] > 0 && h2tr[NW - 1] > 0)
+				break;
 #endif
 
 #ifndef JUST
